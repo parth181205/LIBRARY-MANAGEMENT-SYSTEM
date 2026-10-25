@@ -4,9 +4,9 @@ An enterprise-grade, integrated, and secure **Library Management System** engine
 
 ---
 
-## 📸 Application Screenshots & Visual Showcase
+## 📸 Application Visual Walkthrough & Screenshots
 
-### 1. Public Portal & Academic Discovery
+### 1. Public Portal & Academic Gateway
 ![Public Portal](screenshots/01_public_portal.png)
 *Public landing page offering OPAC quick search, digital library gateway, library operating hours, campus events, and FAQ knowledgebase.*
 
@@ -24,33 +24,51 @@ An enterprise-grade, integrated, and secure **Library Management System** engine
 
 ---
 
-### 4. Librarian Operations & Circulation Dashboard
-![Librarian Dashboard](screenshots/04_librarian_dashboard.png)
-*Real-time library metrics: Total Titles, Copies, Active Loans, Overdue Loans, Active Reservations Queue, and Pending Late Fines.*
+### 4. Book Details & Shelf Location Verification
+![Book Details](screenshots/09_book_details.png)
+*Detailed bibliographic view showing ISBN, authors, publisher, call number, physical rack locations, and real-time copy availability.*
 
 ---
 
-### 5. Circulation Counter (Barcode Scan & Return Desk)
+### 5. Librarian Operations & Circulation Dashboard
+![Librarian Dashboard](screenshots/04_librarian_dashboard.png)
+*Real-time library metrics: Total Titles, Copies, Available Copies, Active Loans, Overdue Loans, Active Reservations Queue, and Pending Late Fines.*
+
+---
+
+### 6. Circulation Counter (Barcode Scan & Return Desk)
 ![Issue & Return Desk](screenshots/05_issue_return_desk.png)
 *Circulation desk for rapid patron lookup, physical copy barcode scanning (e.g. `AM-1-001`), loan dispatch, and 1-click check-in with automated overdue fine calculation.*
 
 ---
 
-### 6. User Governance & Role Management (Admin)
+### 7. User Governance & Role Management (Admin)
 ![User Management](screenshots/06_admin_users.png)
-*Administrator interface to audit registered users, manage student/librarian accounts, and toggle user activation/suspension status.*
+*Administrator interface to audit registered users, manage student/librarian accounts, and toggle user activation/suspension status with instant feedback.*
 
 ---
 
-### 7. Student Academic Portal
+### 8. Student Academic Portal
 ![Student Dashboard](screenshots/07_student_dashboard.png)
 *Personalized patron dashboard showing active borrowings, book holds, total borrowed history, fine balance, and quick access links.*
 
 ---
 
-### 8. My Books Desk & 1-Click Renewals
+### 9. My Books Desk & 1-Click Renewals
 ![My Books](screenshots/08_student_my_books.png)
 *Self-service student portal displaying currently issued books with due date alerts, remaining renewals counter (max 2), and 1-click 14-day loan extension requests.*
+
+---
+
+### 10. Official Clearance & Fine Payment Receipt
+![Payment Receipt](screenshots/10_transaction_receipt.png)
+*Official clearance receipt generated upon fine settlement or book check-in with unique receipt ID, itemized dues, payment method, and printable format.*
+
+---
+
+### 11. FAQ Knowledgebase & Help Portal
+![FAQ Knowledgebase](screenshots/11_faq_knowledgebase.png)
+*Categorized self-service knowledgebase covering borrowing policies, loan limits, fine rates, reservation pickups, and e-resource access.*
 
 ---
 
