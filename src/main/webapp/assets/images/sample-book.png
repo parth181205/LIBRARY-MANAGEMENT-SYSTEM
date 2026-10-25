@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 420" width="300" height="420">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06264A"/>
+      <stop offset="100%" stop-color="#0B315C"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFC928"/>
+      <stop offset="100%" stop-color="#E5B21D"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="420" rx="12" fill="url(#bgGrad)"/>
+  <rect x="16" y="16" width="268" height="388" rx="8" fill="none" stroke="#FFC928" stroke-width="2" stroke-opacity="0.4"/>
+  <rect x="24" y="24" width="252" height="372" rx="6" fill="none" stroke="#FFFFFF" stroke-width="1" stroke-opacity="0.15"/>
+  <circle cx="150" cy="140" r="50" fill="url(#goldGrad)" opacity="0.9"/>
+  <path d="M125 140 C135 125, 145 130, 150 135 C155 130, 165 125, 175 140 V155 C165 145, 155 148, 150 152 C145 148, 135 145, 125 155 Z" fill="#06264A"/>
+  <text x="150" y="240" font-family="'Playfair Display', Georgia, serif" font-size="20" font-weight="bold" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">AMITY UNIVERSITY</text>
+  <text x="150" y="265" font-family="'Cinzel', serif" font-size="13" font-weight="bold" fill="#FFC928" text-anchor="middle" letter-spacing="2">CENTRAL LIBRARY</text>
+  <line x1="80" y1="285" x2="220" y2="285" stroke="#FFC928" stroke-width="2" stroke-opacity="0.6"/>
+  <text x="150" y="320" font-family="'Inter', sans-serif" font-size="12" fill="#E2E8F0" text-anchor="middle">Academic Reference Volume</text>
+  <text x="150" y="380" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Sector 125, Noida &bull; Uttar Pradesh</text>
+</svg>

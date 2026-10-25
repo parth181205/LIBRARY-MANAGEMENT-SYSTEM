@@ -1,0 +1,25 @@
+# =============================================================================
+# AMITY UNIVERSITY NOIDA - LIBRARY CONFIGURATION TEMPLATE
+# Copy this file to application.properties or set Environment Variables
+# =============================================================================
+
+# Database Configuration
+db.url=jdbc:mysql://localhost:3306/amity_library?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Kolkata&characterEncoding=UTF-8
+db.username=YOUR_MYSQL_USERNAME
+db.password=YOUR_MYSQL_PASSWORD
+db.pool.maxSize=15
+db.pool.minIdle=3
+
+# Cloudflare Turnstile Configuration
+# Obtain your production keys from https://dash.cloudflare.com/?to=/:account/turnstile
+turnstile.enabled=true
+turnstile.siteKey=YOUR_CLOUDFLARE_TURNSTILE_SITE_KEY
+turnstile.secretKey=YOUR_CLOUDFLARE_TURNSTILE_SECRET_KEY
+turnstile.verifyUrl=https://challenges.cloudflare.com/turnstile/v0/siteverify
+turnstile.timeoutSeconds=5
+
+# Application & Security Settings
+app.sessionTimeoutMinutes=30
+app.rateLimit.loginMaxAttempts=5
+app.rateLimit.windowMinutes=15
+app.csrf.enabled=true
