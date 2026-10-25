@@ -1,164 +1,140 @@
-# Amity University Noida - Library Management System (Enterprise Academic Edition)
+# 🎓 Amity University Noida - Library Management System (Academic Enterprise Edition)
 
-An enterprise-grade, integrated, secure **Library Management System** engineered specifically for **Amity University Noida**. Built following clean layered architecture using modern Java 17+, Jakarta EE 10 (Tomcat 10.1+), MySQL 8.0, JDBC with HikariCP, BCrypt password encryption, and server-side Cloudflare Turnstile bot challenge verification.
-
----
-
-## 1. Visual Aesthetics & Design System
-
-The application strictly implements the Amity University institutional aesthetic:
-- **Primary Navy (`#06264A`)**: Primary brand identity, headers, buttons, and navigation shell.
-- **Secondary Navy (`#0B315C`)**: Gradients and active states.
-- **Gold Accent (`#FFC928`)**: Academic accents, gold hover transitions, and status highlights.
-- **Neutral Canvas (`#F4F7FB`)**: Clean background ensuring accessible reading contrast.
-- **Card Background (`#FFFFFF`)**: Rounded card elevations with subtle shadows.
-- **Typography**: Headings rendered in classical university serif (`Playfair Display` & `Cinzel`), body in clean `Inter`.
-- **Branding Assets**:
-  - `src/main/webapp/assets/images/amity-noida-logo-transparent.png` (Transparent university crest, `object-fit: contain`).
-  - `src/main/webapp/assets/images/Amity University Noida Sunset Campus.png` (AI-generated campus representation with readable overlay on login screen).
+An enterprise-grade, integrated, and secure **Library Management System** engineered specifically for **Amity University Noida**. Built following clean layered architecture using modern **Java 17+**, **Jakarta EE / Servlets & JSP**, **MySQL 8.0**, **HikariCP**, **BCrypt (Cost 12)** password hashing, and **Cloudflare Turnstile** bot challenge protection.
 
 ---
 
-## 2. Technology Stack
+## 📸 Application Screenshots & Visual Showcase
 
-| Layer | Technology | Version | Purpose |
-| :--- | :--- | :--- | :--- |
-| **Backend Language** | Java (Open / Microsoft JDK) | 17+ (Compiled on 21) | Core business logic & transactions |
-| **Web Container API** | Jakarta Servlet & JSP API | 6.0 / 3.1 | Request routing, sessions, MVC filters |
-| **Server Deployment**| Apache Tomcat | 10.1.x+ | Production Servlet container |
-| **Database** | MySQL Server | 8.0+ | Relational persistence & constraints |
-| **Connection Pool** | HikariCP | 5.1.0 | Fast, thread-safe connection pooling |
-| **Password Security**| jBCrypt | 0.4 (Cost 12) | Irreversible salted password hashing |
-| **Bot Challenge** | Cloudflare Turnstile | v0 API | Server-verified CAPTCHA alternative |
-| **JSON Parser** | Google Gson | 2.11.0 | Cloudflare JSON payload mapping |
-| **Build Tool** | Apache Maven | 3.9+ | Dependency & lifecycle management |
-| **Frontend** | HTML5, CSS3, Vanilla JS | Modern ES6+ | Zero heavy framework overhead |
+### 1. Public Portal & Academic Discovery
+![Public Portal](screenshots/01_public_portal.png)
+*Public landing page offering OPAC quick search, digital library gateway, library operating hours, campus events, and FAQ knowledgebase.*
 
 ---
 
-## 3. Project Architecture
+### 2. Secure Split-Screen Login & Cloudflare Turnstile
+![Login Screen](screenshots/02_login_screen.png)
+*Branded login interface featuring the Amity University Noida campus sunset backdrop, 1-click demo role fillers, and server-verified Cloudflare Turnstile bot defense.*
 
-The codebase adheres strictly to layered software architecture:
+---
 
-```
-c:\Users\parth\Downloads\library management system\
-│
-├── pom.xml                                    # Maven project definition
-├── mvnw.bat                                   # Windows Maven wrapper
-├── .gitignore                                 # Git exclusion rules
-│
-├── database/
-│   ├── schema.sql                             # DDL for all 16 normalized tables
-│   └── seed.sql                               # Demonstration accounts, catalog & loans
-│
-├── src/main/java/com/amity/library/
-│   ├── config/
-│   │   ├── ConfigManager.java                 # Env/sysprop/file configuration loader
-│   │   └── DBUtil.java                        # HikariCP connection pool provider
-│   ├── controller/
-│   │   ├── LoginServlet.java                  # Login & Turnstile challenge processing
-│   │   ├── LogoutServlet.java                 # Session invalidation
-│   │   ├── RegisterServlet.java               # Student self-registration
-│   │   ├── StudentDashboardServlet.java       # Student portal metrics & feed
-│   │   ├── LibrarianDashboardServlet.java     # Circulation desk statistics & alerts
-│   │   ├── AdminDashboardServlet.java         # Governance, user management & rules
-│   │   ├── CatalogueServlet.java              # Search, filter & pagination
-│   │   ├── BookDetailsServlet.java            # Metadata, copies, reservation hold
-│   │   ├── MyBooksServlet.java                # Issued loans, history & renewals
-│   │   ├── IssueReturnServlet.java            # Counter barcode scanner & check-in
-│   │   ├── ReservationsServlet.java           # Reservation queue management
-│   │   ├── FinesPaymentsServlet.java          # Overdue fines & simulated receipts
-│   │   ├── ProfileServlet.java                # Patron info & password change
-│   │   ├── NotificationsServlet.java          # Alerts & reminders
-│   │   ├── AddBookServlet.java                # Add titles & barcode generator
-│   │   └── RenewalDecisionServlet.java        # Approve/decline loan renewals
-│   ├── dao/
-│   │   ├── UserDAO.java                       # Patron lookups & auth queries
-│   │   ├── BookDAO.java                       # Catalog search & book metadata
-│   │   ├── BookCopyDAO.java                   # Barcode scans & shelf locations
-│   │   ├── LoanDAO.java                       # Atomic issue/return transactions
-│   │   ├── ReservationDAO.java                # Queue management & holds
-│   │   ├── RenewalRequestDAO.java             # Extension requests & decisions
-│   │   ├── FineDAO.java                       # Late penalty tracking & waivers
-│   │   ├── PaymentDAO.java                    # Counter receipts & payment audit
-│   │   ├── NotificationDAO.java               # User alerts & messages
-│   │   ├── CategoryDAO.java                   # Format classification
-│   │   ├── PublisherDAO.java                  # Academic presses & publishers
-│   │   ├── AuthorDAO.java                     # Author associations
-│   │   ├── SystemSettingDAO.java              # Dynamic institutional policies
-│   │   └── AuditLogDAO.java                   # Immutable security audit logs
-│   ├── filter/
-│   │   ├── AuthFilter.java                    # Role-based access control (RBAC)
-│   │   └── SecurityHeadersFilter.java         # OWASP headers & context injection
-│   ├── model/                                 # POJO domain models
-│   ├── service/
-│   │   ├── AuthService.java                   # Authentication, registration, rate-limiting
-│   │   ├── TurnstileService.java              # Server-side Cloudflare Siteverify API
-│   │   └── LibraryService.java                # Integrated business workflows
-│   └── util/
-│       ├── PasswordUtil.java                  # BCrypt cost-12 salting & verify
-│       ├── CsrfUtil.java                      # Cryptographic CSRF tokens
-│       └── RateLimiter.java                   # In-memory brute-force sliding window
-│
-├── src/main/resources/
-│   ├── application.properties                 # Active local configuration
-│   └── application.properties.example         # Production template
-│
-└── src/main/webapp/
-    ├── assets/
-    │   ├── css/
-    │   │   ├── main.css                       # Amity UI design tokens, sidebar, tables
-    │   │   └── login.css                      # Split-screen login aesthetics
-    │   ├── js/
-    │   │   └── main.js                        # Toggles, Turnstile callbacks, demo fillers
-    │   └── images/
-    │       ├── amity-noida-logo-transparent.png
-    │       ├── Amity University Noida Sunset Campus.png
-    │       ├── amity-logo.png
-    │       ├── campus-sunset.png
-    │       └── default-book.svg
-    └── WEB-INF/
-        ├── web.xml                            # Session timeout & error routing
-        └── views/                             # Secure JSP templates
+### 3. OPAC Library Catalogue & Smart Filters
+![Library Catalogue](screenshots/03_library_catalogue.png)
+*Full OPAC catalogue search supporting multi-field filtering by Title, Author, ISBN, Publisher, and Category formats with real-time copy availability badges.*
+
+---
+
+### 4. Librarian Operations & Circulation Dashboard
+![Librarian Dashboard](screenshots/04_librarian_dashboard.png)
+*Real-time library metrics: Total Titles, Copies, Active Loans, Overdue Loans, Active Reservations Queue, and Pending Late Fines.*
+
+---
+
+### 5. Circulation Counter (Barcode Scan & Return Desk)
+![Issue & Return Desk](screenshots/05_issue_return_desk.png)
+*Circulation desk for rapid patron lookup, physical copy barcode scanning (e.g. `AM-1-001`), loan dispatch, and 1-click check-in with automated overdue fine calculation.*
+
+---
+
+### 6. User Governance & Role Management (Admin)
+![User Management](screenshots/06_admin_users.png)
+*Administrator interface to audit registered users, manage student/librarian accounts, and toggle user activation/suspension status.*
+
+---
+
+### 7. Student Academic Portal
+![Student Dashboard](screenshots/07_student_dashboard.png)
+*Personalized patron dashboard showing active borrowings, book holds, total borrowed history, fine balance, and quick access links.*
+
+---
+
+### 8. My Books Desk & 1-Click Renewals
+![My Books](screenshots/08_student_my_books.png)
+*Self-service student portal displaying currently issued books with due date alerts, remaining renewals counter (max 2), and 1-click 14-day loan extension requests.*
+
+---
+
+## 🛠️ Tech Stack & Architecture
+
+| Layer | Technology | Details |
+| :--- | :--- | :--- |
+| **Backend** | Java 17 / 21 | Core business logic, thread-safe service architecture |
+| **Servlet API** | Jakarta EE / Servlets 6.0 & JSP | MVC controllers, session security, filter pipelines |
+| **Server** | Apache Tomcat 9.0.x / 10.1.x | Enterprise servlet container (portable instance included) |
+| **Database** | MySQL Server 8.0+ | Relational schema with 16 normalized tables and foreign keys |
+| **Connection Pool**| HikariCP 5.1.0 | High-performance, low-latency JDBC connection pooling |
+| **Password Security**| jBCrypt (Cost 12) | Irreversible salted hash authentication |
+| **Bot Protection** | Cloudflare Turnstile | Server-verified bot challenge (fail-closed security) |
+| **Build Tool** | Apache Maven 3.9+ | Dependency & lifecycle management (`mvnw.bat` included) |
+| **Frontend** | HTML5, Modern CSS, Vanilla JS | Zero bulky framework dependencies, responsive university theme |
+
+---
+
+## 💻 Prerequisites (What to Install & Download)
+
+Before running the application locally, ensure you have installed the following tools:
+
+1. **Java Development Kit (JDK 17 or 21)**
+   - Download: [Eclipse Temurin JDK 17/21](https://adoptium.net/) or [Oracle JDK](https://www.oracle.com/java/technologies/downloads/)
+   - Verify in terminal:
+     ```bash
+     java -version
+     ```
+2. **MySQL Community Server 8.0 or higher**
+   - Download: [MySQL Community Downloads](https://dev.mysql.com/downloads/mysql/) or install via [MySQL Installer for Windows](https://dev.mysql.com/downloads/installer/)
+   - Verify MySQL service is running locally on port `3306`.
+3. **Git**
+   - Download: [Git for Windows](https://git-scm.com/download/win)
+4. **Apache Maven (Optional)**
+   - The repository includes a self-contained Windows Maven wrapper (`mvnw.bat`), so installing standalone Maven is optional.
+
+---
+
+## 🚀 Step-by-Step Local Setup & Execution Guide
+
+### Step 1: Clone the Repository
+Open PowerShell or your command prompt:
+```bash
+git clone https://github.com/parth181205/LIBRARY-MANAGEMENT-SYSTEM.git
+cd LIBRARY-MANAGEMENT-SYSTEM
 ```
 
 ---
 
-## 4. Database Setup & Initialization
+### Step 2: Database Setup & Population
 
-1. Ensure MySQL Server 8.0+ is running.
-2. Open MySQL CLI or MySQL Workbench:
+1. Log into your local MySQL CLI or MySQL Workbench:
    ```bash
    mysql -u root -p
    ```
-3. Execute the schema script:
+2. Run the database creation script:
    ```sql
    SOURCE database/schema.sql;
    ```
-4. Execute the demonstration seed script:
+3. Populate the database with demonstration data (books, copies, patron accounts, loans, and settings):
    ```sql
    SOURCE database/seed.sql;
    ```
-5. Confirm tables exist:
+4. Verify the database:
    ```sql
    USE amity_library;
    SHOW TABLES;
    ```
+   *(You should see 16 normalized tables including `users`, `books`, `book_copies`, `loans`, `reservations`, `fines`, and `audit_logs`).*
 
 ---
 
-## 5. Configuration & Cloudflare Turnstile
+### Step 3: Configure Database Credentials
 
-Edit `src/main/resources/application.properties` (or supply environment variables):
+Open `src/main/resources/application.properties` and update your MySQL username and password:
 
 ```properties
-# Database Configuration
+# Database Connection Settings
 db.url=jdbc:mysql://localhost:3306/amity_library?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Kolkata&characterEncoding=UTF-8
 db.username=root
 db.password=YOUR_MYSQL_PASSWORD
 
-# Cloudflare Turnstile Configuration
-# Default official Cloudflare testing keys (Always Pass)
+# Cloudflare Turnstile Keys (Pre-configured with official testing keys that always pass)
 turnstile.enabled=true
 turnstile.siteKey=1x00000000000000000000AA
 turnstile.secretKey=1x0000000000000000000000000000000AA
@@ -166,103 +142,128 @@ turnstile.verifyUrl=https://challenges.cloudflare.com/turnstile/v0/siteverify
 turnstile.timeoutSeconds=5
 ```
 
-### Production Cloudflare Turnstile Setup
-1. Log in to [Cloudflare Dashboard](https://dash.cloudflare.com/).
-2. Select your account &rarr; **Turnstile** &rarr; **Add Widget**.
-3. Widget Name: `Amity University Library Login`.
-4. Permitted Domains: Add your production university domain (e.g., `library.amity.edu` or `localhost` for testing).
-5. Widget Mode: **Managed** (Interactive challenge only when suspicious).
-6. Copy the **Site Key** and **Secret Key**.
-7. Set environment variables on your production server:
-   ```bash
-   set TURNSTILE_SITE_KEY=0x4AAAAAA...
-   set TURNSTILE_SECRET_KEY=0x4AAAAAA...
-   ```
-8. The server-side `TurnstileService` implements a **fail-closed** policy: tokens that are missing, invalid, expired, or failed are immediately rejected before querying MySQL.
-
 ---
 
-## 6. Build & Deployment Instructions
+### Step 4: Compile the Application
 
-### Compiling and Running Unit Tests
-Use the included Maven wrapper script:
-```powershell
-.\mvnw.bat clean test
-```
-*All 12 unit and integration tests will execute and report build success.*
-
-### Generating Production WAR
+Run the Maven wrapper to compile Java classes and run automated unit tests:
 ```powershell
 .\mvnw.bat clean package
 ```
-The deployable archive will be generated at:
-`target/amity-library.war`
+This builds the deployable web archive: `target/amity-library.war`.
 
-### Deploying to Apache Tomcat 10.1+
-1. Download and install **Apache Tomcat 10.1.x** (compatible with Jakarta EE 10 / Servlet 6.0).
-2. Copy `target/amity-library.war` into Tomcat's `webapps/` folder:
+---
+
+### Step 5: Run the Server Locally
+
+#### Method A: 1-Click Launch (Recommended)
+Use the included automated startup script:
+```powershell
+.\start-server.bat
+```
+*Or via PowerShell:*
+```powershell
+.\start-server.ps1
+```
+The server will boot up and be accessible immediately at:
+👉 **`http://localhost:8080/amity-library/`**
+
+#### Method B: Standalone Apache Tomcat Deployment
+If you have your own Apache Tomcat installed (e.g. `C:\apache-tomcat-9.0.x` or `10.1.x`):
+1. Copy `target/amity-library.war` to your Tomcat `webapps/` folder:
    ```powershell
-   Copy-Item target\amity-library.war "C:\path\to\apache-tomcat-10.1.x\webapps\"
+   Copy-Item target\amity-library.war "C:\apache-tomcat\webapps\"
    ```
-3. Start Tomcat:
+2. Start Tomcat:
    ```powershell
-   & "C:\path\to\apache-tomcat-10.1.x\bin\startup.bat"
+   & "C:\apache-tomcat\bin\startup.bat"
    ```
-4. Access the web portal in your browser:
+3. Open your browser:
    `http://localhost:8080/amity-library/`
 
 ---
 
-## 7. Demonstration Accounts & Testing Guide
+## 🔑 Demonstration Accounts & Credentials
 
-For quick evaluation during project review, the login screen includes **1-click credential quick-fill buttons**:
+The login page includes **1-Click Demo Fillers** for instant evaluation:
 
-| Portal Role | Enrollment / Employee ID | Official Email | Demonstration Password | Notes |
-| :--- | :--- | :--- | :--- | :--- |
-| **Student** | `A2305221001` | `student1@amity.edu` | `Student@Amity2026` | Aarav Sharma (3rd Year CSE). Has 1 active loan and 1 overdue loan. |
-| **Student** | `A2305221002` | `student2@amity.edu` | `Student@Amity2026` | Ananya Verma (2nd Year MBA). Has 1 active loan and 1 reservation hold. |
-| **Librarian** | `LIB-2001` | `librarian@amity.edu` | `Librarian@Amity2026` | Dr. Sunita Mehta. Access to circulation desk, barcode scanner, fines & waivers. |
-| **Administrator** | `ADM-1001` | `admin@amity.edu` | `Admin@Amity2026` | Prof. Rajesh K. Kapoor. Access to user directory, library rules & audit logs. |
-
----
-
-## 8. Implemented Functionality Checklist
-
-- [x] **Split-screen Login**: Campus sunset background, university logo, 4 feature highlights, Cloudflare Turnstile widget, role tabs.
-- [x] **Bot Defense**: Cloudflare Turnstile server-side verification using Java `HttpClient` with fail-closed security.
-- [x] **Brute-Force Rate Limiting**: In-memory sliding window preventing password guessing attacks.
-- [x] **BCrypt Security**: Salted cost-12 hashing for all user passwords; zero plaintext credentials stored.
-- [x] **Role Authorization**: Filter-level URL protection for Student, Librarian, and Admin portals.
-- [x] **Student Dashboard**: Live statistics for issued books, reserved items, total borrowed, and pending fines.
-- [x] **Searchable Catalogue**: Multi-field search (title, author, ISBN, publisher, category), format filters, sorting, and pagination.
-- [x] **Book Details Page**: Complete academic metadata, physical copy statuses, and student reservation holds.
-- [x] **My Books Desk**: Tabs for currently issued loans, renewal requests, and borrowing history with overdue indicators.
-- [x] **Librarian Issue & Return**: Barcode scanning, patron lookup, check-in with automated overdue fine calculation.
-- [x] **Reservation Management**: Queue ordering, pickup alerts, hold expiry rules, and cancellation.
-- [x] **Fines & Payments**: Itemized overdue fee tracking, simulated online payment, cash counter receipt issuance, and printable receipts.
-- [x] **Institutional Governance**: Admin rules configuration (loan duration, fine rates, renewal limits), user directory, and security audit logs.
-- [x] **Responsive Amity UI**: Desktop, tablet, and mobile layouts with accessible color contrast and collapsible navigation.
+| Portal Role | Official Email | Demo Password | Capabilities & Access |
+| :--- | :--- | :--- | :--- |
+| **Administrator** | `admin@amity.edu` | `admin123` | System rules, user activation/suspension, audit trail, global settings |
+| **Librarian** | `librarian@amity.edu` | `lib123` | Counter circulation, barcode scanner, check-in, overdue fines & receipts |
+| **Student** | `parth@amity.edu` | `user123` | Book search, hold reservations, 14-day loan renewals, fee receipts |
+| **Student (Alt)** | `aarav.sharma@s.amity.edu` | `student123` | Student borrowing profile with active & overdue books |
 
 ---
 
-## 9. Test Execution Report
+## 📂 Project Directory Structure
 
-The automated test suite was executed via Maven Surefire:
-- `AuthServiceTest`:
-  - `testSuccessfulAuthentication` &rarr; **PASSED**
-  - `testFailedAuthenticationWrongPassword` &rarr; **PASSED**
-  - `testSuspendedUserBlocked` &rarr; **PASSED**
-  - `testRateLimitingEnforcement` &rarr; **PASSED**
-- `TurnstileServiceTest`:
-  - `testMissingTokenIsRejected` &rarr; **PASSED**
-  - `testEmptyTokenIsRejected` &rarr; **PASSED**
-  - `testDisabledTurnstilePasses` &rarr; **PASSED**
-- `PasswordUtilTest`:
-  - `testPasswordHashingAndVerification` &rarr; **PASSED**
-  - `generateDemoHashes` &rarr; **PASSED**
-- `CsrfUtilTest`:
-  - `testTokenGenerationAndSessionStorage` &rarr; **PASSED**
-  - `testTokenValidationSuccess` &rarr; **PASSED**
-  - `testTokenValidationMismatch` &rarr; **PASSED**
+```
+LIBRARY-MANAGEMENT-SYSTEM/
+│
+├── pom.xml                                    # Maven configuration & dependencies
+├── mvnw.bat                                   # Windows Maven wrapper
+├── .gitignore                                 # Git exclusions (ignores build & server dirs)
+├── start-server.bat                           # 1-Click startup script
+├── start-server.ps1                           # PowerShell startup script
+├── README.md                                  # Complete documentation & setup manual
+│
+├── database/
+│   ├── schema.sql                             # DDL for 16 relational tables
+│   └── seed.sql                               # Demo books, copies, users, loans, settings
+│
+├── screenshots/                               # Application interface screenshots
+│   ├── 01_public_portal.png
+│   ├── 02_login_screen.png
+│   ├── 03_library_catalogue.png
+│   ├── 04_librarian_dashboard.png
+│   ├── 05_issue_return_desk.png
+│   ├── 06_admin_users.png
+│   ├── 07_student_dashboard.png
+│   └── 08_student_my_books.png
+│
+├── src/main/java/com/amity/library/
+│   ├── config/                                # DBUtil (HikariCP) & ConfigManager
+│   ├── controller/                            # MVC Servlets (Login, Catalogue, IssueReturn, Dashboard)
+│   ├── dao/                                   # Data Access Objects (UserDAO, BookDAO, LoanDAO, FineDAO)
+│   ├── filter/                                # RBAC AuthFilter & OWASP SecurityHeadersFilter
+│   ├── model/                                 # Domain POJOs (Book, BookCopy, Loan, User, Reservation)
+│   ├── service/                               # AuthService, LibraryService, TurnstileService
+│   └── util/                                  # PasswordUtil (BCrypt), CsrfUtil, RateLimiter
+│
+├── src/main/resources/
+│   └── application.properties                 # Active DB & Turnstile settings
+│
+└── src/main/webapp/
+    ├── assets/
+    │   ├── css/                               # Institutional theme, glassmorphism, responsive grid
+    │   ├── images/                            # Amity University crest, campus sunset imagery
+    │   └── js/                                # Dynamic postAction, Turnstile callbacks
+    └── WEB-INF/
+        ├── web.xml                            # Session timeout & error routing
+        └── views/                             # JSP templates (Student, Librarian, Admin, Public)
+```
 
-**Overall Result**: 12 Tests Run &bull; 0 Failures &bull; 0 Errors &bull; 100% Passing.
+---
+
+## ❓ Troubleshooting & FAQs
+
+- **Port 8080 is already in use:**
+  If port 8080 is occupied by another application, open `tomcat/conf/server.xml` and change the connector port:
+  ```xml
+  <Connector port="8081" protocol="HTTP/1.1" connectionTimeout="20000" redirectPort="8443" />
+  ```
+  Then access `http://localhost:8081/amity-library/`.
+
+- **MySQL Access Denied / Connection Refused:**
+  Ensure MySQL service is running (`Get-Service MySQL*`) and verify password in `src/main/resources/application.properties`.
+
+- **Cloudflare Turnstile on Localhost:**
+  The pre-configured site key and secret key in `application.properties` are official Cloudflare testing keys (`1x00000000000000000000AA`) designed to pass reliably on `localhost`.
+
+---
+
+## 📜 License & Accreditation
+
+Engineered for academic operations at **Amity University Uttar Pradesh, Sector 125, Noida**.  
+Licensed under the [MIT License](LICENSE).
